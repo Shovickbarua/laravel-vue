@@ -27,8 +27,13 @@ const loading = ref(false);
 
 onMounted(() => {
   getCategory();
-  if(props.id){
-    showProduct(props.id)
+  if (props.id) {
+    showProduct(props.id);
+  } else {
+    generateSku(); // Generate SKU for new products only
+  }
+  if (!props.id){
+    generateSku();
   }
 });
 
@@ -52,6 +57,13 @@ console.log('res', res)
     product.value = res.data.data;
   }
 };
+
+const generateSku = () => {
+  const timestamp = Date.now().toString().slice(-4);
+  const randomNum = Math.floor(1000 + Math.random() * 9000);
+  product.value.sku = `SKU-${timestamp}-${randomNum}`;
+};
+
 
 const handleSubmit = async () => {
   loading.value = true;
@@ -111,10 +123,10 @@ const handleSubmit = async () => {
 
         <div class="w-5/12 gap-4">
           <div>
-            <label class="text-gray-700 dark:text-gray-200" for="inventory_id">Inventory</label>
+            <label class="text-gray-700 dark:text-gray-200" for="inventory_id">Category</label>
             <select id="inventory_id" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 focus:outline-none focus:ring"
               v-model="product.cat_id">
-              <option value="">--Select Inventory--</option>
+              <option value="">--Select Category--</option>
               <option v-for="category in categories" :key="category.id" :value="category.id">
                 {{ category.name }}
               </option>
