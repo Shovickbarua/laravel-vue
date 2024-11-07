@@ -81,8 +81,9 @@ const productDelete = async (id) =>{
                                             </div>
                                           </td> 
                                           <td class="py-8 px-6 text-sm font-medium float-right whitespace-nowrap flex my-auto">
-                                            <RouterLink :to="{ name: 'edit', params: { id: product.id }}" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</RouterLink>
-                                            <!-- <RouterLink to='`/edit/${product.id}` 'class="text-blue-600 dark:text-blue-500 hover:underline">Edit</RouterLink> -->
+                                            <!-- <RouterLink :to="{ name: 'edit', params: { id: product.id }}" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</RouterLink> -->
+                                            <!-- <RouterLink :to='`/edit/${product.id}`' class="text-blue-600 dark:text-blue-500 hover:underline">Edit</RouterLink> -->
+                                            <RouterLink :to="'/edit/' + product.id" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</RouterLink>
                                               <button @click.prevent="productDelete(product.id)" class="ml-2 text-blue-600 dark:text-blue-500 hover:underline ">Delete</button>
                                           </td>
                                       </tr>
